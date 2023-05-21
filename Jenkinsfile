@@ -73,7 +73,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo apt-get install -y docker-compose'
+                sh 'apt-get install -y docker-compose'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
