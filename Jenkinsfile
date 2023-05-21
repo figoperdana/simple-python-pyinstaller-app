@@ -45,7 +45,6 @@ pipeline {
             post {
                 success {
                     archiveArtifacts "dist/add2vals" 
-                    sh "docker run --rm -v ${VOLUME} -v ${env.WORKSPACE}/dist:/src/dist ${IMAGE} 'rm -rf build dist'"
                 }
             }
         }
