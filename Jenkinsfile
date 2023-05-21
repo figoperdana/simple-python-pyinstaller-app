@@ -33,18 +33,14 @@ pipeline {
         stage('Deliver') { 
             agent any
             environment { 
-                VOLUME = '$(pwd)/sources:/src'
+                VOLUME = "${env.WORKSPACE}/sources:/src"
                 IMAGE = 'cdrx/pyinstaller-linux:python2'
             }
             steps {
                 dir(path: env.BUILD_ID) { 
                     unstash(name: 'compiled-results') 
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'" 
-                    // Copy the add2vals to workspace root
-                    sh 'cp sources/dist/add2vals ../../'
                 }
-                // Check if the file is at the expected location
-                sh 'ls -l'
             }
             post {
                 success {
