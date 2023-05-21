@@ -67,16 +67,11 @@ pipeline {
             }
         }
         stage('Deploy') { 
-            agent {
-                docker {
-                    image 'docker/compose:1.29.2'
-                }
-            }
+            agent any
             steps {
-                sh 'docker-compose up -d'
-                sh 'sleep 60'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
-                sh './jenkins/scripts/kill.sh'
+                script {
+                    sh 'docker build -t my-python-app .'
+                }
             }
         }
     }
