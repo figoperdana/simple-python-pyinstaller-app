@@ -55,13 +55,22 @@ pipeline {
                 input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
             }
         }
+        stage('Test before Deploy') { 
+            agent {
+                docker {
+                    image 'qnib/pytest'
+                }
+            }
+            steps {
+                sh 'chmod +x ./jenkins/scripts/test.sh'
+                sh './jenkins/scripts/test.sh'
+            }
+        }
         stage('Deploy') { 
             agent any
             steps {
                 sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
-                sh 'chmod +x ./jenkins/scripts/test.sh'
-                sh './jenkins/scripts/test.sh'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
