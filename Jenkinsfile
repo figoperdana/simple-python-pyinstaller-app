@@ -58,10 +58,14 @@ pipeline {
         stage('Deploy') { 
             agent any
             steps {
+                sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
+                sh 'chmod +x ./jenkins/scripts/test.sh'
                 sh './jenkins/scripts/test.sh'
+                sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
+                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
             }
         }
