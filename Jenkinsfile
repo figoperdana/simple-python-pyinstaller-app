@@ -49,5 +49,19 @@ pipeline {
                 }
             }
         }
+        stage('Manual Approval') {
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh './deliver.sh'
+                sh './test.sh'
+                sh './deploy.sh'
+                sh 'sleep 60'
+                sh './kill.sh'
+            }
+        }
     }
 }
