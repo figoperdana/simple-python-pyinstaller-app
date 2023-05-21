@@ -67,7 +67,11 @@ pipeline {
             }
         }
         stage('Deploy') { 
-            agent any
+            agent {
+                docker {
+                    image 'ubuntu'
+                }
+            }
             steps {
                 sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
