@@ -69,11 +69,10 @@ pipeline {
         stage('Deploy') { 
             agent {
                 docker {
-                    image 'ubuntu'
+                    image 'docker/compose:1.29.2' // atau versi Docker Compose lainnya
                 }
             }
             steps {
-                sh 'apt-get install -y docker-compose'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
