@@ -74,8 +74,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deploy.sh'
-                sh './jenkins/scripts/deploy.sh'
+                sh 'docker-compose up -d'
                 sh 'sleep 60'
                 sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
