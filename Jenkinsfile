@@ -69,6 +69,7 @@ pipeline {
             agent any
             steps {
                 script {
+                    sh 'cp -r dist/ .'
                     sh 'docker build -t my-python-app .'
                 }
             }
