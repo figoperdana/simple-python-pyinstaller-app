@@ -67,14 +67,11 @@ pipeline {
             }
         }
         stage('Deploy') { 
-            agent {
-                docker {
-                    image 'docker/compose:1.29.2'
-                }
-            }
+            agent any
             steps {
                 sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
+                sh 'apk add --no-cache docker-compose'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
