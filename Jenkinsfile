@@ -73,8 +73,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deliver.sh'
-                sh './jenkins/scripts/deliver.sh'
                 sh 'sudo apt-get install -y docker-compose'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
