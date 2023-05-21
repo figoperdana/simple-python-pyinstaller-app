@@ -71,6 +71,7 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent any
             steps {
                 script {
                     sh 'docker build -t my-python-app .'
