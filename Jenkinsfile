@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
-                sh 'apk add --no-cache docker-compose'
+                sh 'apt-get install docker-compose'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
                 sh 'sleep 60'
