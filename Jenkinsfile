@@ -69,8 +69,7 @@ pipeline {
         stage('Deploy') { 
             agent {
                 docker {
-                    image 'docker:dind'
-                    args '--privileged'
+                    image 'docker/compose:1.29.2'
                 }
             }
             steps {
