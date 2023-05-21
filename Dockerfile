@@ -1,3 +1,3 @@
 FROM python:2-alpine
-COPY add2vals /app/add2vals
-CMD ["python", "/app/add2vals"]
+COPY add2vals /sources/add2vals
+CMD ["python", "/sources/add2vals"]
