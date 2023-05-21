@@ -70,6 +70,10 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t my-python-app .'
+                    sh 'docker run -d --name=my-python-app my-python-app'
+                    sh 'sleep 60'
+                    sh 'docker stop my-python-app'
+                    sh 'docker rm my-python-app'
                 }
             }
         }
