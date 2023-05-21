@@ -40,11 +40,11 @@ pipeline {
                 dir(path: env.BUILD_ID) { 
                     unstash(name: 'compiled-results') 
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'" 
-                    sh '''
-                    cp sources/dist/add2vals .
-                    ls -l
-                    '''
+                    // Copy the add2vals to workspace root
+                    sh 'cp sources/dist/add2vals ../../'
                 }
+                // Check if the file is at the expected location
+                sh 'ls -l'
             }
             post {
                 success {
@@ -70,8 +70,7 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deploy') { 
-            agent any
+        stage('Deploy') {
             steps {
                 script {
                     sh 'docker build -t my-python-app .'
